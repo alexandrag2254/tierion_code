@@ -1,8 +1,8 @@
-var base = 'https://api.bitproof.io/v1';
+var base = 'https://api.tierion.com';
 
 module.exports = {
   urls: {
-    'push': base + '/blockchain/push',
-    'read': base + '/blockchain/read'
+    'get_database': base + '/v1/datastores',
+    // 'get ': base + '/blockchain/read'
   }
 };

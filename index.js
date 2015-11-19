@@ -1,79 +1,54 @@
-/*!
- * dependencies
- */
+
+ //* dependencies
 
 var request = require('request'),
     config = require('./config');
 
-/*!
- * init
- */
 
-function Bitproof(key, secret) {
+function Tierion(key, username, datastore) {
 
   // Auth
-  this.key = key;
-  this.secret = secret;
-
+  this.username = 'alexandrag2254@gmail.com';
+  this.key = 'DTUi7hmwlcumDgl1+yppA7JF91vrv2IFihlAUS19/r0=';
 	// we should test auth right now
 }
 
-/*!
- * get auth headers
- */
 
-Bitproof.prototype.getAuthHeaders = function() {
+//// get auth headers
+
+
+Tierion.prototype.getAuthHeaders = function() {
   return { 
-    'API_KEY': this.key,
-    'API_SECRET': this.secret
+    'X-Username': this.username,
+    'X-Api-Key': this.key
   }; 
 }
 
-/*!
- * send hex to Bitproof
- */
 
-Bitproof.prototype.push = function(hex, success, err) {
-  // check routine could be done locally
+ //// get database info from Tierion
 
-  var options = {
-    uri: config.urls.push,
-    headers: this.getAuthHeaders(),
-    method: 'POST',
-    json: {
-      "data": hex
-    }
-  };
-  request(options, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      success(body);
-    } else {
-      err(error);
-    }
-  });
-};
-
-/*!
- * get hex from Bitproof
- */
-
-Bitproof.prototype.read = function(txid, success, err) {
+Tierion.prototype.get_database = function(datastore_key, success, err) {
   // we could add options, such as output limits / include metadata
 
   var options = {
-    uri: config.urls.read,
+    uri: config.urls.get_database,
     method: 'GET',
     qs: {
-      txid: txid
+      datastore_key: 'h_Tn_X9uO0KVV5zxTN4Uig'
     }
   };
   request(options, function (error, response, body) {
     if (!error && response.statusCode == 200) {
+      console.log('hello');
+      console.log(body)
+      console.log(response)
       success(body);
     } else {
       err(error);
+      console.log(error);
+      console.log('error')
     }
   });
 };
 
-module.exports = Bitproof;
+module.exports = Tierion;
