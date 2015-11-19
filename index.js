@@ -31,16 +31,18 @@ Tierion.prototype.get_database = function(datastore_id, success, err) {
   var options = {
     uri: config.urls.get_database,
     method: 'GET',
+    headers: this.getAuthHeaders(),
     qs: {
-      datastore_id: '100'
+      datastore_id: '277'
     }
   };
   request(options, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       console.log('hello');
       console.log(body)
-      console.log(response)
-      success(body);
+      console.log(response.body);
+      // console.log(response)
+      // success(body);
     } else {
       // err(error);
       // console.log("response", response)
@@ -55,6 +57,6 @@ Tierion.prototype.get_database = function(datastore_id, success, err) {
 tierion = new Tierion('DTUi7hmwlcumDgl1+yppA7JF91vrv2IFihlAUS19/r0=', 'alexandrag2254@gmail.com') //key and username
 tierion.getAuthHeaders();
 tierion.get_database();
-console.log('end of code')
+console.log('end of code');
 
 module.exports = Tierion;
